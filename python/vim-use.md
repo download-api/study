@@ -8,7 +8,7 @@ this is a test
       c: 修改
       y: 拷贝
       v: 可视化选择 (V for line c-v  visual block)
-
+      
 * **介词**
 
       定语用在名词之前，表明以哪种方式来执行动作,几个例子。
@@ -75,8 +75,16 @@ this is a test
       dd删除当前行保持正常模式
 * **复制**
       
-      "ay
-      y
+      "ayiw
+      "ayaw
+      yiw
+      yis
+      yip
+      yit
+      yaw
+      yas
+      yap
+      yat
 
 ### insert模式
 ### visual模式
