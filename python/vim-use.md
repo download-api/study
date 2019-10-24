@@ -1,6 +1,6 @@
-###vim 使用
+### vim 使用
 
-###基本语法
+### 基本语法
 * **动词**
 
       所谓动词指的是我们执行的动作，这些动作可以施加在名词之上。可以看看下面几个常见的动作：
@@ -37,7 +37,7 @@
 
       块模式 S 增加包裹
 
-###normal模式
+### normal模式
 * **添加**
       i光标前进入插入模式
       a光标后进入插入模式
@@ -73,8 +73,8 @@
       "ay
       y
 
-###insert模式
-###visual
-###visual line模式
-###visual block模式
+### insert模式
+### visual
+### visual line模式
+### visual block模式
 
