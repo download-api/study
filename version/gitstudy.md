@@ -12,15 +12,17 @@
  ```
  <工作区>---->git add  <暂存区>---->git commit <本地库>
  ```
+
 ###  git和代码托管中心
 * git
-     维护本地库
+        维护本地库
 * 代码托管中心
-    * 网络托管(外网)
+    1. 网络托管(外网)
             维护远程库
             github、码云 
-    * 本地托管(局域网)
+    1. 本地托管(局域网)
             gitlab
+
 ```
 团队本地库A————>push 远程库  (把本地内容推送到远程库）
 
@@ -31,13 +33,18 @@
 团队外部人员修改代码 push到远程库C  远程库C ----> pull request 请求 --->审核 ---> merge 远程库A
 ```
 ### 基本命令
-* git staues
-    查看工作区或暂存区状态
-* git add filename.
-    将文件放在暂存区
-* git commit file.
 * git init 
-    初始化工作区
+
+        初始化工作区
+* git staues
+
+        查看工作区或暂存区状态
+* git add filename.
+
+        将文件放在暂存区
+* git commit file.
+
+        将暂存区数据提交到本地仓库
 
 ### 项目级别签名
 * git config user.name name
