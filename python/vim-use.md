@@ -74,7 +74,7 @@
       y
 
 ### insert模式
-### visual
+### visual模式
 ### visual line模式
 ### visual block模式
 
