@@ -1,0 +1,384 @@
+"=================================================
+"       语法
+"
+"       map 公式
+"       map {输入}  {输出}
+"       noremap:作用输出参数 表示不将输出中包含的命令不做翻译
+"       
+"       surround
+"       yi符号          : 复制符号中的内容 vim 默认命令
+"       ya符号          : 复制符号包括内容 vim 默认命令
+"       ys+vim命令+符号 : 包裹内容
+"       ys为前缀        : 表示包裹
+"       cs符号          : 符号 修改符号到 符号
+"       ds符号          : 删除符号
+"       count动词  d c y f 介词 a i  名词  w s p t     
+"       介词经常与 " [] {}  <> 使用 表示作用的范围 是符号内容还是 符号+内容
+"       另外 i + 名词 相当于直接写            ----------->名词 
+"       而   a + 名词 会扩大这个名词前后空格  ----------->左空格 + 名词 + 右空格
+"
+"       Commenter
+"       ,ca在可选的注释方式之间切换，比如C/C++ 的块注释/* */和行注释//
+"       ,cc注释当前行
+"       ,c<space> 切换注释/非注释状态
+"       ,cs 以”性感”的方式注释
+"       ,cA 在当前行尾添加注释符，并进入Insert模式
+"       ,cu 取消注释
+"       ,c$ 从光标开始到行尾注释  ，这个要说说因为c$也是从光标到行尾的快捷键，这个按过逗号（，）要快一点按c$
+"       2,cc 光标以下count行添加注释
+"       2,cu 光标以下count行取消注释
+"       2,cm:光标以下count行添加块注释(2,cm)
+"
+"=================================================
+
+call plug#begin('~/_vim/plugged')
+
+""js 代码补全高亮
+Plug 'mattn/emmet-vim'
+""mardown
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
+""快速制作表格
+Plug 'dhruvasagar/vim-table-mode'
+
+""surround
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-markdown'
+
+""nerdtree
+Plug 'scrooloose/nerdtree'
+
+""airline 状态栏主题
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+""文件对齐
+Plug 'godlygeek/tabular'
+
+""快速选择文本对象
+Plug 'gcmt/wildfire.vim'
+
+""代码注释
+Plug 'scrooloose/nerdcommenter' 
+
+""多光标
+Plug 'terryma/vim-multiple-cursors'
+
+""文件历史
+Plug 'mbbill/undotree'
+
+""颜色主题
+Plug 'ayu-theme/ayu-vim'
+Plug 'sickill/vim-monokai'
+Plug 'hzchirs/vim-material'
+
+""python代码折叠
+Plug 'tmhedberg/SimpylFold'
+""代码对齐
+Plug 'nathanaelkane/vim-indent-guides'
+
+""文件浏览窗口
+Plug 'vim-scripts/winmanager'
+Plug 'vim-scripts/taglist.vim'
+
+""python自动补全插件
+Plug 'davidhalter/jedi-vim'
+
+call plug#end()
+
+au GUIEnter * call libcallnr("vimtweak.dll", "test", 200)
+
+""jedi-vim 代码补全
+""filetype plugin indent on
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#goto_command = ""
+let g:jedi#goto_assignments_command = ""
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "S"
+let g:jedi#usages_command = ""
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = ""
+autocmd FileType python setlocal completeopt-=preview
+" ----- 调用python ----- 
+"按 Ctrl + F5 调用当前脚本 
+autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\" 
+autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
+autocmd BufRead *.py nmap <C-F5> :!python %<CR>
+
+" 执行命令隐藏/显示文件窗口
+let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:AutoOpenWinManager = 1
+nmap wm :WMToggle <CR>
+
+exec         "nohlsearch"                        
+
+let           mapleader=','
+set           noerrorbells
+set           novisualbell
+set           t_vb=
+" set          relativenumber
+
+"tab键
+"==================================================
+nmap           tc              :tabnew<cr>
+nmap           tq              :tabclose<cr>
+nmap           tp              :tabp<cr>
+nmap           tn              :tabn<cr>
+
+"undotree
+"==================================================
+nnoremap <leader>u :UndotreeToggle<cr>
+
+"tabular
+"==================================================
+map   <leader>t    :Tabularize/
+map   <leader>tt   :Tabularize/=<CR><ESC>
+map   <Leader>tf   :Tabularize/:<CR><ESC>
+map   <leader>tT   :Tabularize/=\zs<CR><ESC>
+map   <Leader>tF   :Tabularize/:\zs<CR><ESC>
+"==================================================
+
+"surround
+"==================================================
+" nmap          <leader>w      ysiw
+
+"airline
+""==================================================
+"highlight Normal ctermfg=grey ctermbg=darkblue
+
+""Dark
+"set background=dark
+"colorscheme vim-material
+
+""Palenight
+let g:material_style='palenight'
+set background=dark
+""colorscheme vim-material
+"
+""Oceanic
+" let g:material_style='oceanic'
+" set background=dark
+" colorscheme vim-material
+
+""Light
+" set background=light
+" colorscheme vim-material
+
+" let termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage  theme
+" let ayucolor="dark"   " for dark version of theme
+
+" colorscheme ayu
+" colorscheme monokai
+" colorscheme murphy
+" colorscheme peachpuff
+colorscheme vim-material
+
+let                     g:airline_theme='material'
+" let                     g:airline#extensions#tabline#buffer_nr_show = 1
+" let                     g:airline#extensions#tabline#enabled      = 1
+" let                     g:airline#extensions#tabline#left_sep     = ' '
+" let                     g:airline#extensions#tabline#left_alt_sep = '|'
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-s-tab> :bp<CR>
+
+"markdown
+"==================================================
+nmap <silent> <F8>      <Plug>MarkdownPreview
+nmap <silent> <F9>      <Plug>StopMarkdownPreview
+imap <silent> <F8>      <Plug>MarkdownPreview
+imap <silent> <F9>      <Plug>StopMarkdownPreview
+
+"NERDTree
+"==================================================
+map            tr                   :NERDTreeMirror<CR>
+map            tr                   :NERDTreeToggle<CR>
+
+"nerdcommenter
+"==================================================
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+
+"==================================================
+nmap        ss                A<space><space>-----><ESC>2F<space><esc>
+nmap        sd                <ESC>f-2hdf>
+map         s                 :nohlsearch<CR>
+map         S                 <nop>
+
+map        <C-o>              <ESC>
+imap       <C-o>              <ESC>
+cmap       <C-o>              <ESC>
+
+imap       <c-h>              <ESC>i
+imap       <c-l>              <ESC>la
+
+map        <leader>a          0
+map        <leader>e          $
+map        <leader>g          %
+nmap       <leader>r          :source $MYVIMRC<CR>
+
+"==================================================
+imap           (              ()<ESC>i
+imap           {              {}<ESC>i
+imap           [              []<ESC>i
+inoremap       '              ''<ESC>i
+inoremap       "              ""<ESC>i
+inoremap       <              <><ESC>i
+" map        <leader>s <ESC>
+" imap换成<c-i>会引起冲突 让tab键也变成了esc"
+" imap       <leader>s <ESC>
+" cmap       <leader>s <ESC>
+"一定要注意<esc>后面是否有空格 有空格会执行空格
+" imap       <leader>c                 *
+" imap       <leader>y                 &
+" map          ;a             1
+" map          ;b             2
+" map          ;c             3
+" map          ;d             4
+" map          ;e             5
+" map          ;f             6
+" map          ;h             7
+" map          ;i             8
+" map          ;j             9
+" 分割出来的窗口位于当前窗口下边/右边
+"==================================================
+set           splitbelow
+set           splitright
+nmap           J               5jzz
+nmap           K               5kzz
+
+"垂直方向向右增大向左减小   
+"==================================================
+nmap           <M-h>           :vertical resize-5<CR>
+nmap           <M-l>           :vertical resiz+5<CR>
+
+"水平方向向下增大向上减小   
+"=================================================
+nmap           <M-k>           :resize-5<CR>
+nmap           <M-j>           :resize+5<CR>
+
+"切换使用分格窗口
+"==================================================
+nmap           <C-h>           <C-w>h<ESC>
+nmap           <C-l>           <C-w>l<ESC>
+nmap           <C-k>           <C-w>k<ESC>
+nmap           <C-j>           <C-w>j<ESC>
+
+"set          list               "设置是否在编辑器中显示下面 listchars设置的空白符号
+set           nu
+set           cursorline
+set           showcmd
+set           wrap
+set           smartcase 
+set           ignorecase
+set           hlsearch
+set           incsearch
+set           clipboard+=unnamed " Vim 的默认寄存器和系统剪贴板共享
+set           wildmenu
+set           autoindent
+set           foldmethod=indent
+set           ai                 " 设置自动缩进
+set           cindent            " 设置使用 C/C++ 语言的自动缩进方式
+set           shiftwidth=4       " 设置自动缩进 4 个空格
+set           guioptions-=e      " 使用内置 tab 样式而不是 gui
+set           softtabstop=4      " 即设置 softtabstop 为 4. 输入 tab 后就跳了 4 格
+set           tabstop=4          " 实际的 tab 即为 4 个空格, 而不是缺省的 8 个
+set           expandtab          " 在输入 tab 后, vim 用恰当的空格来填充这个 tab
+set           nocompatible       " 设置backspace的工作方式 bs删除不了退格
+set           backspace=indent,eol,start
+set           listchars=tab:>-,space:^,eol:$ "同时tab默认占4个空格时，tab就显示为>---，每行末尾显示为$
+
+"不显示工具/菜单栏 
+"==================================================
+set           fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+set           encoding=utf-8
+set           langmenu=zh_CN
+set           helplang=cn
+let           $LANG = 'en_US.UTF-8'
+set           guifont=Consolas:h14 
+
+set           guioptions-=T
+set           guioptions-=m
+set           guioptions-=L
+set           guioptions-=r
+set           guioptions-=b
+set           winaltkeys=no " 设置 alt 键不映射到菜单栏
+set           columns=100
+set           nobackup
+set           noswapfile
+
+syntax on
+
+"=================================================递归实验
+"非控制台命令都会进行递归操作比如下面这个例子
+"map            z :llll
+"noremap            c zzc<CR>
+"map            ,c :qqqq
+"你得改成这样才不会进行递归操作翻译 z为:llll
+"map            z :llll
+"noremap            c zzc<CR>
+"map            ,c :qqqq
+"并且递归也会翻译自己   即   map c zzcc
+"map {第一个参数}  {第二个参数}}  
+"1.第二个参数发生递归 而第一个参数不会 
+
+"2.只要第二个参数中 包含 第一个参数中的字符 他就会递归翻译
+"或其中的字符在其他映射的第一个参数中
+
+"3.noremap的作用仅仅是对第二个参数起作用告诉第二个参数 不用递归翻译
+"只执行你现在写的按键操作
+
+" let g:table_mode_corner='|'
+" let g:table_mode_corner_corner=':'
+" let g:table_mode_header_fillchar='-'
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+"代码折叠
+" let g:SimpylFold_docstring_preview=0
+
+"wildfire 快速选择文本对象
+" nmap<leader>s<Plug>(wildfire-quick-select)
+
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+" let g:neocomplete#enable_at_startup = 1
+" if has("termguicolors")
+"     " fix bug for vim
+"     set t_8f=^[[38;2;%lu;%lu;%lum
+"     set t_8b=^[[48;2;%lu;%lu;%lum
+"
+"     " enable true color
+"     set termguicolors
+" endif

@@ -27,6 +27,14 @@ del 变量名
 ###常量
 数值、字符串、元组
 
+###运算符
+* 逻辑运算符
+        and or not 
+* 成员运算符
+        in  not
+* 身份运算符
+        is  is not
+
 ###类型转换
 ```python
 int(1.9)
@@ -41,8 +49,18 @@ print(max(1,2))
 print(round(1.2233))
 print(round(1.335,2))
 print(abs(-300))
-    
 ```
+### 字符串拼接
+
+```
+number = 10
+floatnumber = 9.12332
+str = "name"
+hello = "this is a test"
+str = str + hello
+print("%s %d %.9f" % (str,number,floatnumber))
+```
+    
 ###type
 查看数据类型
 
