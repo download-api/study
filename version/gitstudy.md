@@ -26,3 +26,25 @@
 团队外部人员----->fork 远程库A （将远程库A内容下载到）远程库C --->对远程C---->clone到  团队外部人员 本地库C 
 团队外部人员修改代码 push到远程库C  远程库C ----> pull request 请求 --->审核 ---> merge 远程库A
 ```
+### 基本命令
+* git staues
+    查看工作区或暂存区状态
+* git add filename.
+    将文件放在暂存区
+* git commit file.
+* git init 
+    初始化工作区
+
+### 项目级别签名
+* git config user.name name
+    
+* git config user.email email
+
+
+### 系统级别签名
+* git config global user.name name
+    
+* git config global user.email email
+
+        一般使用系统级别签名 两个都设置使用，执行项目级别签名命令,
+        会在.git目录生成config。
