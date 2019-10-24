@@ -91,4 +91,5 @@
 ### visual模式
 ### visual line模式
 ### visual block模式
+### (insert)临时进入normal模式
 
